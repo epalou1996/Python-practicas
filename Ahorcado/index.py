@@ -4,7 +4,7 @@ from palabras import palabras_posibles
 
 palabra=random.choice(palabras_posibles)
 
-print(palabra)
+
 
 #Ahorcado
 
@@ -83,27 +83,35 @@ def juego(palabra):
     espacios = len(palabra)
     sustituta = list(slot*espacios)
     palabra = list(palabra)
-
-    for a in IMAGES:
+    x = len(IMAGES)
+    intentos = 0
+    while intentos<x:
         miss = False
         while miss == False:
             print('')
-            print(a)
+            print(IMAGES[intentos])
             print('')
             print(sustituta)
             print('')
             print(FIN_DIBUJO)
             letra = input('Inserta la letra: ')
             if letra in palabra:
-                tempo = []
-                for l in palabra:
-                    if l == letra:   
-                        sustituta[palabra.index(letra)]  = letra
-                        print(palabra.index(letra))
+                count = 0
+                for i in palabra:
+                    if letra == i:
+                        sustituta[count] = letra
+                    count +=1
+                miss =True
+                    
+
             else:
-                miss == True
-
-
+                miss = True
+                intentos += 1
+        if intentos == x:
+            print("Perdiste")
+        elif sustituta == palabra:
+                print("Ganaste")
+                intentos = x
 
 if __name__ == '__main__':
     juego(palabra)
